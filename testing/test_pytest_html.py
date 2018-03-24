@@ -521,10 +521,12 @@ class TestHTML:
             import pytest
             @pytest.fixture(autouse=True, scope='session')
             def _environment(request):
+                raise Exception()
                 request.config._metadata['content'] = '{0}'
 
             @pytest.mark.skip
-            def test_pass(): pass
+            def test_pass():
+                pass
         """.format(content))
         result, html = run(testdir)
         assert result.ret == 0
